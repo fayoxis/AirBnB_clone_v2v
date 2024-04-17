@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""this will Create and distributes then archive to web servers"""
+"""this  will Create and distributes then archive to web servers"""
 from fabric.api import local, run, put, env, cd
 from fabric.context_managers import shell_env
 import os
@@ -23,7 +23,7 @@ def do_pack():
     return None
 
 def do_deploy(archive_path):
-    """Distribute an archive to web servers."""
+    """it Distribute and archive web servers."""
     if not os.path.exists(archive_path):
         return False
 
@@ -46,7 +46,7 @@ def do_deploy(archive_path):
         return False
 
 def deploy():
-    """Create and distribute an archive to web servers."""
+    """Create & distribute to web servers."""
     archive_path = do_pack()
     if not archive_path:
         return False
