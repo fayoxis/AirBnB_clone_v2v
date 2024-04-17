@@ -1,37 +1,31 @@
 #!/usr/bin/env bash
-# Update package information
-sudo apt-get update
+# Update packages and install Nginx
+sudo apt-get update && sudo apt-get -y install nginx
 
-# Install Nginx
-sudo apt-get -y install nginx
-
-# Allow Nginx HTTP traffic
+# Allow Nginx through the firewall
 sudo ufw allow 'Nginx HTTP'
 
-# Create necessary directories
-sudo mkdir -p /data/web_static/releases/test/
-sudo mkdir -p /data/web_static/shared/
+# Create directories for web data
+sudo mkdir -p /data/{web_static,web_static/releases,web_static/shared,web_static/releases/test}
 
-# Create index.html file with desired content
-sudo bash -c 'cat > /data/web_static/releases/test/index.html << EOF
-<html>
+# Create sample index.html file  
+echo "<html>
   <head>
   </head>
   <body>
     Holberton School
   </body>
-</html>
-EOF'
+</html>" | sudo tee /data/web_static/releases/test/index.html
 
-# Create symbolic link
-sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+# Symlink current release 
+sudo ln -s -f /data/web_static/releases/test/ /data/web_static/current
 
-# Change ownership of directories
+# Change ownership of web files
 sudo chown -R ubuntu:ubuntu /data/
 
-# Add configuration for serving static files
+# Configure Nginx for static files
 sudo sed -i '/listen 80 default_server/a location /hbnb_static { alias /data/web_static/current/;}'
 /etc/nginx/sites-enabled/default
 
-# Restart Nginx service
-sudo service nginx restart
+# Restart Nginx
+sudo systemctl restart nginx
