@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""A module for Fabric script that generates a .tgz archive."""
+"""this module is a Fabric script that generates a .tgz archive."""
 import os
 import tarfile
 from datetime import datetime
