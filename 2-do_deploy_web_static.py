@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""this archive to your web servers, using the function do_deploy"""
+"""this will  archive to your web servers, using  do_deploy"""
 from fabric.api import env, run, put, local, cd
 from contextlib import contextmanager
 import os
@@ -8,7 +8,7 @@ env.hosts = ['18.209.224.119', '54.157.173.122']
 
 @contextmanager
 def source_code():
-    """Context manager to create a temporary directory for the source code."""
+    """ this is a Context manager to create a temporary directory ."""
     directory = run('mktemp -d --tmpdir=/tmp')
     try:
         yield directory
@@ -16,7 +16,7 @@ def source_code():
         run(f'rm -rf {directory}')
 
 def do_deploy(archive_path):
-    """Distribute an archive to the web servers."""
+    """it Distribute an archive servers."""
     if not os.path.exists(archive_path):
         return False
 
