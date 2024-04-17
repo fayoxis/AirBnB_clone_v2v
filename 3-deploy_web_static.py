@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""this  will Create and distributes then archive to web servers"""
+"""this  will Create and distributes to the archive servers"""
 from fabric.api import local, run, put, env, cd
 from fabric.context_managers import shell_env
 import os
@@ -8,7 +8,7 @@ import datetime
 env.hosts = ['18.209.224.119', '54.157.173.122']
 
 def do_pack():
-    """Generate a tgz archive from the web_static folder."""
+    """it Generate a tgz archive from the folder."""
     timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     archive_name = f"web_static_{timestamp}.tgz"
     archive_path = os.path.join("versions", archive_name)
@@ -23,7 +23,7 @@ def do_pack():
     return None
 
 def do_deploy(archive_path):
-    """it Distribute and archive web servers."""
+    """it Distribute & archive servers."""
     if not os.path.exists(archive_path):
         return False
 
@@ -46,7 +46,7 @@ def do_deploy(archive_path):
         return False
 
 def deploy():
-    """Create & distribute to web servers."""
+    """ it Create & distribute to servers."""
     archive_path = do_pack()
     if not archive_path:
         return False
