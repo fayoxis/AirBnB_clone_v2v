@@ -8,12 +8,12 @@ env.hosts = ['18.209.224.119', '54.157.173.122']
 env.user = "ubuntu"
 
 def clean_releases(keep_count=2):
-    """Clean up old releases on both local and remote servers"""
+    """ this Clean up the old releases on  servers"""
     clean_local_releases(keep_count)
     clean_remote_releases(keep_count)
 
 def clean_local_releases(keep_count):
-    """Clean up old releases on the local machine"""
+    """this Clean up old releases on the machine"""
     versions_dir = "versions"
     if os.path.exists(versions_dir):
         local_releases = sorted(os.listdir(versions_dir), reverse=True)
@@ -22,7 +22,7 @@ def clean_local_releases(keep_count):
             shutil.rmtree(release_path)
 
 def clean_remote_releases(keep_count):
-    """Clean up old releases on the remote servers"""
+    """this definitely Clean up old releases on servers"""
     releases_path = "/data/web_static/releases"
     with cd(releases_path):
         remote_releases = sorted(run("ls -t").stdout.strip().split("\n"), reverse=True)
