@@ -1,26 +1,19 @@
 -- Prepare MySQL server for project
 
--- Define database, user and password
-DEFINE db_name = 'hbnb_dev_db';
-DEFINE user_name = 'hbnb_dev';   
-DEFINE password = 'hbnb_dev_pwd';
+-- Database, user and password variables
+SET @database = 'hbnb_dev_db';
+SET @user = 'hbnb_dev';
+SET @password = 'hbnb_dev_pwd';
 
 -- Create database if not exists
-IF NOT EXISTS (SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = db_name)
-THEN 
-  CREATE DATABASE db_name;
-END IF;
+CREATE DATABASE IF NOT EXISTS @database; 
 
--- Create user if not exists   
-IF NOT EXISTS (SELECT USER FROM mysql.user WHERE USER = user_name) 
-THEN
-  CREATE USER user_name IDENTIFIED BY password;
-END IF;
+-- Create user if not exists  
+CREATE USER IF NOT EXISTS @user IDENTIFIED BY @password;
 
--- Grant privileges to user  
-GRANT ALL PRIVILEGES ON db_name.* TO user_name;
-FLUSH PRIVILEGES;
+-- Grant privileges to user
+GRANT ALL PRIVILEGES ON @database.* TO @user;
+GRANT SELECT ON performance_schema.* TO @user;
 
--- Grant SELECT on performance_schema    
-GRANT SELECT ON performance_schema.* TO user_name;
+-- Apply privileges  
 FLUSH PRIVILEGES;
